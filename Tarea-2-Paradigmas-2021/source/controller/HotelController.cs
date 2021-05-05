@@ -41,10 +41,30 @@ namespace Tarea_2_Paradigmas_2021.model
             }
         }
 
-        public List<Habitacion> habitacionesLibres(){
-            List<Habitacion> libres = new List<Habitacion>();
-            return libres;
+        private List<Habitacion> habitacionesFiltro(char filtro){
+            List<Habitacion> consulta = new List<Habitacion>();
+            foreach (List<Habitacion> piso in habitaciones){
+                foreach (Habitacion habitacion in piso){
+                    if (habitacion.Estado.Equals(filtro)){
+                        consulta.Add(habitacion);
+                    }
+                }
+            }
+            return consulta;
         }
+
+        public List<Habitacion> habitacionesLibres(){
+            return habitacionesFiltro('L');
+        }
+
+        public List<Habitacion> habitacionesMantenimiento(){
+            return habitacionesFiltro('M');
+        }
+
+        public List<Habitacion> habitacionesOcupadas(){
+            return habitacionesFiltro('O');
+        }
+        
 
         public Habitacion this[int piso, int numero]
         {
